@@ -32,7 +32,25 @@ class HomePage1 extends StatelessWidget {
   Widget build(BuildContext context) {
     BottomClass.bottomClass.listContextAddBottomMethod(context);
     return Scaffold(
-      bottomNavigationBar: bottomIconNavigator(context: context, selectText: "selectText"),
+      body: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(50.0),
+            child: ListView.builder(
+              itemCount: colorSet.length,
+              itemBuilder: (context, index) => ListTile(
+                leading: Container(
+                  height: 50,
+                  width: 50,
+                  color: colorSet[index],
+                ),
+                title: Text(0.toString()),
+              ),),
+          ),
+          bottomIconNavigator(context: context, selectText: "selectText"),
+        ],
+      ),
+      // bottomNavigationBar: bottomIconNavigator(context: context, selectText: "selectText"),
     );
   }
 }
