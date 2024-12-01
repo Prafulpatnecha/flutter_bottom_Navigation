@@ -15,8 +15,11 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       routes: {
-        "/": (context) => const HomePage(),
-        "/home": (context) => const HomePage1(),
+        "/": (context) => Hero(
+            tag: "page1",
+            child: HomePage()),
+        "/home": (context) => Hero(tag: "page1",
+        child: const HomePage1()),
       },
     );
   }
@@ -35,6 +38,7 @@ class HomePage1 extends StatelessWidget {
 }
 
 
+List colorSet = [Colors.black,Colors.red,Colors.blue,Colors.orange];
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -43,8 +47,22 @@ class HomePage extends StatelessWidget {
     BottomClass.bottomClass.listContextAddBottomMethod(context);
     return Scaffold(
       // appBar: AppBar(),
-      // backgroundColor: Colors.blue,
-      bottomNavigationBar: bottomIconNavigator(context: context, selectText: "selectText"),
+      body: Stack(
+        children: [
+          ListView.builder(
+            itemCount: colorSet.length+20,
+            itemBuilder: (context, index) => ListTile(
+              leading: Container(
+                height: 50,
+                width: 50,
+                color: colorSet[1],
+              ),
+              title: Text(0.toString()),
+            ),),
+          bottomIconNavigator(context: context, selectText: "selectText"),
+        ],
+      ),
+      backgroundColor: Colors.blue.withOpacity(0.1),
     );
   }
 }
@@ -64,7 +82,7 @@ class BottomClass {
           // Navigator.of(context).pushNamed("/home");
           if(index!=0)
             {
-              Navigator.of(context).pushReplacementNamed("/home");
+              Navigator.of(context).pushReplacementNamed("/");
               index=0;
             }
         },
@@ -89,7 +107,7 @@ class BottomClass {
         onPressed: () {
           if(index!=2)
           {
-            Navigator.of(context).pushReplacementNamed("/home");
+            Navigator.of(context).pushReplacementNamed("/");
             index=2;
           }
         },
