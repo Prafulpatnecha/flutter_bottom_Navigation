@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -19,7 +18,7 @@ class MyApp extends StatelessWidget {
             tag: "page1",
             child: HomePage()),
         "/home": (context) => Hero(tag: "page1",
-        child: const HomePage1()),
+            child: const HomePage1()),
       },
     );
   }
@@ -47,10 +46,10 @@ class HomePage1 extends StatelessWidget {
                 title: Text(0.toString()),
               ),),
           ),
-          bottomIconNavigator(context: context, selectText: "selectText"),
+          // bottomIconNavigator(context: context, selectText: "selectText"),
         ],
       ),
-      // bottomNavigationBar: bottomIconNavigator(context: context, selectText: "selectText"),
+      bottomNavigationBar: bottomContainer(),
     );
   }
 }
@@ -77,9 +76,10 @@ class HomePage extends StatelessWidget {
               ),
               title: Text(0.toString()),
             ),),
-          bottomIconNavigator(context: context, selectText: "selectText"),
+          // bottomIconNavigator(context: context, selectText: "selectText"),
         ],
       ),
+      bottomNavigationBar: bottomContainer(),
       backgroundColor: Colors.blue.withOpacity(0.1),
     );
   }
@@ -99,14 +99,14 @@ class BottomClass {
         onPressed: () {
           // Navigator.of(context).pushNamed("/home");
           if(index!=0)
-            {
-              Navigator.of(context).pushReplacementNamed("/");
-              index=0;
-            }
+          {
+            Navigator.of(context).pushReplacementNamed("/");
+            index=0;
+          }
         },
         child: SizedBox(
-          height: double.infinity,
-            child: index==0?columnIconSetUser(iconFind: Icon(Icons.home,color: Colors.black,size: 26,), textFind: 'Home'):Icon(Icons.home_outlined,color: Colors.black,)),
+            height: double.infinity,
+            child: index==0?columnIconSetUser(iconFind: Icon(Icons.home,color: Colors.black,size: 22,), textFind: 'Home'):columnIconSetUser2(iconFind: Icon(Icons.home_outlined,color: Colors.black,), textFind: "Home")),
       ),
       TextButton(
         onPressed: () {
@@ -118,7 +118,7 @@ class BottomClass {
         },
         child: SizedBox(
             height: double.infinity,
-            child: index==1?columnIconSetUser(iconFind: Icon(Icons.web,color: Colors.black,size: 26,), textFind: 'Website'):const Icon(Icons.web_asset,color: Colors.black,)),
+            child: index==1?columnIconSetUser(iconFind: Icon(Icons.web,color: Colors.black,size: 22,), textFind: 'Website'):columnIconSetUser2(iconFind: Icon(Icons.web_asset,color: Colors.black,), textFind: "Website")),
       ),
       TextButton(
         // height: double.infinity,
@@ -131,7 +131,7 @@ class BottomClass {
         },
         child: SizedBox(
             height: double.infinity,
-            child: index==2?columnIconSetUser(iconFind: Icon(Icons.chat,color: Colors.black,size: 26,), textFind: 'Website'):const Icon(Icons.chat_outlined,color: Colors.black,)),
+            child: index==2?columnIconSetUser(iconFind: Icon(Icons.chat,color: Colors.black,size: 22,), textFind: 'Massage'):columnIconSetUser2(iconFind: const Icon(Icons.chat_outlined,color: Colors.black,), textFind: "Massage")),
       ),
       TextButton(
         // height: double.infinity,
@@ -144,7 +144,7 @@ class BottomClass {
         },
         child: SizedBox(
             height: double.infinity,
-            child: index==3?columnIconSetUser(iconFind: Icon(Icons.favorite,color: Colors.black,size: 26,), textFind: 'Website'):const Icon(Icons.favorite_border_rounded,color: Colors.black,)),
+            child: index==3?columnIconSetUser(iconFind: Icon(Icons.favorite,color: Colors.black,size: 22,), textFind: 'Favorite'):columnIconSetUser2(iconFind: Icon(Icons.favorite_border_rounded,color: Colors.black,), textFind: "Favorite")),
       ),
       TextButton(
         // height: double.infinity,
@@ -157,7 +157,7 @@ class BottomClass {
         },
         child: SizedBox(
             height: double.infinity,
-            child: index==4?columnIconSetUser(iconFind: Icon(Icons.person,color: Colors.black,size: 26,), textFind: 'Website'):const Icon(Icons.person_2_outlined,color: Colors.black,)),
+            child: index==4?columnIconSetUser(iconFind: Icon(Icons.person,color: Colors.black,size: 22,), textFind: 'Profile'):columnIconSetUser2(iconFind: Icon(Icons.person_2_outlined,color: Colors.black,), textFind: "Profile")),
       ),
     ];
   }
@@ -165,44 +165,52 @@ class BottomClass {
   Column columnIconSetUser({required Icon iconFind,required String textFind}) {
     return Column(
       mainAxisSize: MainAxisSize.min,
-            children: [
-              Spacer(),
-              Spacer(),
-              iconFind,
-              Spacer(),
-              Text(textFind,style: TextStyle(color: Colors.black,fontSize: 13),),
-              Spacer(),
-              Spacer(),
-            ],
-          );
+      children: [
+        Spacer(),
+        Spacer(),
+        Container(
+            width: 60,
+            height: 30,
+            decoration: BoxDecoration(
+            color: Colors.grey.withOpacity(0.5),
+              borderRadius: BorderRadius.circular(15)),
+            child: iconFind),
+        Spacer(),
+        Text(textFind,style: TextStyle(color: Colors.black,fontSize: 13,fontWeight: FontWeight.bold),),
+        Spacer(),
+        Spacer(),
+      ],
+    );
   }
 }
+Column columnIconSetUser2({required Icon iconFind,required String textFind}) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Spacer(),
+        Spacer(),
+        iconFind,
+        Spacer(),
+        Text(textFind,style: TextStyle(color: Colors.black,fontSize: 12),),
+        Spacer(),
+        Spacer(),
+      ],
+    );
+  }
 
-Align bottomIconNavigator(
-    {required BuildContext context,
-    required String selectText,
-    Color? colors,
-    double? radius}) {
-  return Align(
-    alignment: Alignment.bottomCenter,
-    child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 40.0,vertical: 20),
-      child: Container(
-        height: 80,
-        width: double.infinity,
-        decoration: BoxDecoration(
-            color: colors ?? Colors.grey.shade200,
-            borderRadius: BorderRadius.circular(radius ?? 25)),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            ...List.generate(
-              _bottomList.length,
+
+Container bottomContainer() {
+  return Container(
+    height: 80,
+    color: Colors.grey.shade200,
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        ...List.generate(
+          _bottomList.length,
               (index) => _bottomList[index],
-            ),
-          ],
         ),
-      ),
+      ],
     ),
   );
 }

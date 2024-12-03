@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
             tag: "page1",
             child: HomePage()),
         "/home": (context) => Hero(tag: "page1",
-        child: const HomePage1()),
+            child: const HomePage1()),
       },
     );
   }
@@ -47,10 +47,22 @@ class HomePage1 extends StatelessWidget {
                 title: Text(0.toString()),
               ),),
           ),
-          bottomIconNavigator(context: context, selectText: "selectText"),
+          // bottomIconNavigator(context: context, selectText: "selectText"),
         ],
       ),
-      // bottomNavigationBar: bottomIconNavigator(context: context, selectText: "selectText"),
+      bottomNavigationBar: Container(
+        height: 100,
+        color: Colors.grey.shade200,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            ...List.generate(
+              _bottomList.length,
+                  (index) => _bottomList[index],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -77,7 +89,7 @@ class HomePage extends StatelessWidget {
               ),
               title: Text(0.toString()),
             ),),
-          bottomIconNavigator(context: context, selectText: "selectText"),
+          bottomIconNavigator(context: context,),
         ],
       ),
       backgroundColor: Colors.blue.withOpacity(0.1),
@@ -99,13 +111,13 @@ class BottomClass {
         onPressed: () {
           // Navigator.of(context).pushNamed("/home");
           if(index!=0)
-            {
-              Navigator.of(context).pushReplacementNamed("/");
-              index=0;
-            }
+          {
+            Navigator.of(context).pushReplacementNamed("/");
+            index=0;
+          }
         },
         child: SizedBox(
-          height: double.infinity,
+            height: double.infinity,
             child: index==0?columnIconSetUser(iconFind: Icon(Icons.home,color: Colors.black,size: 26,), textFind: 'Home'):Icon(Icons.home_outlined,color: Colors.black,)),
       ),
       TextButton(
@@ -165,24 +177,23 @@ class BottomClass {
   Column columnIconSetUser({required Icon iconFind,required String textFind}) {
     return Column(
       mainAxisSize: MainAxisSize.min,
-            children: [
-              Spacer(),
-              Spacer(),
-              iconFind,
-              Spacer(),
-              Text(textFind,style: TextStyle(color: Colors.black,fontSize: 13),),
-              Spacer(),
-              Spacer(),
-            ],
-          );
+      children: [
+        Spacer(),
+        Spacer(),
+        iconFind,
+        Spacer(),
+        Text(textFind,style: TextStyle(color: Colors.black,fontSize: 13),),
+        Spacer(),
+        Spacer(),
+      ],
+    );
   }
 }
 
 Align bottomIconNavigator(
     {required BuildContext context,
-    required String selectText,
-    Color? colors,
-    double? radius}) {
+      Color? colors,
+      double? radius}) {
   return Align(
     alignment: Alignment.bottomCenter,
     child: Padding(
@@ -198,7 +209,7 @@ Align bottomIconNavigator(
           children: [
             ...List.generate(
               _bottomList.length,
-              (index) => _bottomList[index],
+                  (index) => _bottomList[index],
             ),
           ],
         ),
@@ -206,3 +217,5 @@ Align bottomIconNavigator(
     ),
   );
 }
+
+
