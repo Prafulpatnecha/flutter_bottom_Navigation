@@ -83,7 +83,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-
+//todo ads will be show and workable
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 

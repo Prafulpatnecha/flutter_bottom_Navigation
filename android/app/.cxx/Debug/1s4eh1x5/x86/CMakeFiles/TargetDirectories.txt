@@ -1,0 +1,2 @@
+D:/StudioProjects/flutter_ads_app/android/app/.cxx/Debug/1s4eh1x5/x86/CMakeFiles/edit_cache.dir
+D:/StudioProjects/flutter_ads_app/android/app/.cxx/Debug/1s4eh1x5/x86/CMakeFiles/rebuild_cache.dir
